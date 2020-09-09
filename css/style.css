@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'MyWebFont';
+    src: url(MorePerfectDOSVGA.ttf) format('woff2');
+}
+
+:root {
+    --text-primary: #b6b6b6;
+    --text-size: 16px;
+}
+
+body {
+    font-family: 'MyWebFont', Fallback, sans-serif;
+}
+
+.generalSpan {
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    padding-bottom: 20px;
+}
+
+.wellDone {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    font-size: 5rem;
+    color: #008000;
+}
+
+.manySpans {
+    font-size: 1.5em;
+}
+
+.toBeReplaced {
+    border: 2px solid #999999;
+    background-color: #000000;
+    margin: auto 0;
+}
+
+.toBeRevealed {
+    visibility: visible;
+    margin: auto 0;
+}
+
+.inputClass,
+.inputButton {
+    display: flex;
+    margin: auto;
+    font-size: 3rem;
+}
