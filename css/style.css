@@ -1,15 +1,10 @@
-@font-face {
-    font-family: 'MyWebFont';
-    src: url(MorePerfectDOSVGA.ttf) format('woff2');
-}
-
 :root {
     --text-primary: #b6b6b6;
     --text-size: 16px;
 }
 
 body {
-    font-family: 'MyWebFont', Fallback, sans-serif;
+    font-family: 'Lucida Console', Monaco, monospace;
 }
 
 .generalSpan {
@@ -17,6 +12,8 @@ body {
     justify-content: center;
     font-size: 2rem;
     padding-bottom: 20px;
+    flex-wrap: wrap;
+    white-space: pre;
 }
 
 .wellDone {
@@ -29,12 +26,13 @@ body {
 
 .manySpans {
     font-size: 1.5em;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .toBeReplaced {
-    border: 2px solid #999999;
-    background-color: #000000;
-    margin: auto 0;
+    color: black;
+    font-family: 'Lucida Console', Monaco, monospace;
 }
 
 .toBeRevealed {

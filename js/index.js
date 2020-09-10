@@ -1,20 +1,19 @@
 sentence =
-    'An old woman lives next door. Every morning she gets up at six and goes out for a long walk. In the afternoon she works in her garden, and in the evening she often goes to the movies. One day I asked her about her life. “I am a very happy person,” she told me “and do you know my secret? I have never been married!”';
+    'An old woman lives next door. Every morning she gets up at six and goes out for a long walk. In the afternoon she works in her garden, and in the evening she often goes to the movies. One day I asked her about her life. “I am a very happy person,” she told me “and do you know my secret? I have never been married!“';
 sentences = sentenceToArray(sentence);
 function sentenceToArray(sentence) {
-    const re = /\w+|\.+|[^\s\w]+/g;
+    const re = /\w+|./g;
     const split = sentence.match(re);
+
     return split;
 }
-
+console.log('sentences ' + sentences);
 const manySpans = document.querySelector('.manySpans');
-let wordCount = 0;
-let countArray = [];
+
 sentences.forEach(function (element) {
-    const mySpan = document.createElement('span');
-    elementLower = element.toLowerCase();
-    mySpan.setAttribute('id', elementLower);
     if (
+        element != ' ' &&
+        element != ', ' &&
         element != '!' &&
         element != '?' &&
         element != "'" &&
@@ -24,18 +23,24 @@ sentences.forEach(function (element) {
         element != '’' &&
         element != ',”' &&
         element != ',' &&
-        element != '!”'
+        element != ', ' &&
+        element != '!”' &&
+        element != ' “' &&
+        element != ',” ' &&
+        element != '”' &&
+        element != '? '
     ) {
-        mySpan.setAttribute('class', 'toBeReplaced');
-        countArray.push(element);
-        console.log(countArray);
+        let mySpan = document.createElement('span');
+        mySpan.classList.add(element);
+        let asterisks = element.replace(/[^,;.]/g, '_');
+        mySpan.innerHTML = asterisks;
+        manySpans.appendChild(mySpan);
+    } else {
+        let punctuationSpan = document.createElement('span');
 
-        wordCount++;
+        punctuationSpan.innerHTML = element;
+        manySpans.appendChild(punctuationSpan);
     }
-
-    mySpan.innerHTML = element + ' ';
-
-    manySpans.appendChild(mySpan);
 });
 
 const inputElement = document.querySelector('.inputClass');
@@ -44,6 +49,7 @@ const inputButton = document.querySelector('.inputButton');
 inputElement.addEventListener('keydown', function (e) {
     if (e.keyCode === 13) {
         mySubmitFunction();
+        mySubmitFunctionUpper();
         inputElement.value = '';
     }
 });
@@ -51,38 +57,41 @@ inputElement.addEventListener('keydown', function (e) {
 const mySubmitFunction = () => {
     let guess = inputElement.value.trim();
 
-    if (
-        sentences.includes(guess) ||
-        sentence.includes(guess.charAt(0).toUpperCase() + guess.slice(1))
-    ) {
-        const removeItList = document.querySelectorAll('#' + guess);
+    if (sentences.includes(guess)) {
+        console.log('hit');
+        const removeItList = document.querySelectorAll(`.${guess}`);
+        removeItList.forEach(element => (element.textContent = `${guess} `));
+
+        removeItList.forEach(element => element.classList.add('toBeRevealed'));
         removeItList.forEach(element =>
-            element.setAttribute('class', 'toBeRevealed')
+            element.classList.remove('toBeReplaced')
         );
 
-        wordCount--;
-        let i = 0;
-        while (countArray[i] < countArray.length) {
-            if (countArray[i] === guess) {
-                countArray.splice(i, 1);
-            } else {
-                ++i;
-                console.log(countArray);
-                console.log(countArray.length);
-            }
+        removeItList.forEach(element => element.classList.add('toBeRevealed'));
+        removeItList.forEach(element =>
+            element.classList.remove('toBeReplaced')
+        );
+    }
+};
 
-            return countArray;
-        }
+const mySubmitFunctionUpper = () => {
+    let guess = inputElement.value.trim();
+    let upperGuess = guess.charAt(0).toUpperCase() + guess.slice(1);
+    console.log(upperGuess);
 
-        if (countArray.length == 0) {
-            const wellDone = document.createElement('div');
-            wellDone.setAttribute('class', 'wellDone');
-            wellDone.textContent = 'Well done!';
-            manySpans.appendChild(wellDone);
-            inputElement.disabled = 'true';
-            inputButton.disabled = 'true';
-        }
-    } else {
-        console.log('try again');
+    if (sentences.includes(upperGuess)) {
+        console.log('hitUpper');
+
+        const removeItUpperList = document.querySelectorAll(`.${upperGuess}`);
+        removeItUpperList.forEach(
+            element => (element.textContent = `${upperGuess} `)
+        );
+
+        removeItUpperList.forEach(element =>
+            element.classList.add('toBeRevealed')
+        );
+        removeItUpperList.forEach(element =>
+            element.classList.remove('toBeReplaced')
+        );
     }
 };
