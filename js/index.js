@@ -58,7 +58,6 @@ const mySubmitFunction = () => {
     let guess = inputElement.value.trim();
 
     if (sentences.includes(guess)) {
-        console.log('hit');
         const removeItList = document.querySelectorAll(`.${guess}`);
         removeItList.forEach(element => (element.textContent = `${guess} `));
 
@@ -71,6 +70,8 @@ const mySubmitFunction = () => {
         removeItList.forEach(element =>
             element.classList.remove('toBeReplaced')
         );
+    } else {
+        errorShow();
     }
 };
 
@@ -80,8 +81,6 @@ const mySubmitFunctionUpper = () => {
     console.log(upperGuess);
 
     if (sentences.includes(upperGuess)) {
-        console.log('hitUpper');
-
         const removeItUpperList = document.querySelectorAll(`.${upperGuess}`);
         removeItUpperList.forEach(
             element => (element.textContent = `${upperGuess} `)
@@ -95,3 +94,13 @@ const mySubmitFunctionUpper = () => {
         );
     }
 };
+function errorShow() {
+    let guess = inputElement.value.trim();
+    let upperGuess = guess.charAt(0).toUpperCase() + guess.slice(1);
+    if (sentences.includes(guess) || sentences.includes(upperGuess)) {
+        return;
+    } else {
+        inputElement.classList.add('error');
+        setTimeout(() => inputElement.classList.remove('error'), 70);
+    }
+}

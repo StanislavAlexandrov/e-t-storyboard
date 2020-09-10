@@ -46,3 +46,9 @@ body {
     margin: auto;
     font-size: 3rem;
 }
+
+.error {
+    border: dotted 5px;
+    color: #ff0000;
+    transform: scale(1.5, 2);
+}
