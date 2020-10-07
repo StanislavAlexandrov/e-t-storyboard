@@ -1,3 +1,5 @@
+const button = document.querySelector('button');
+
 sentence =
     'Last Sunday some friends and I went out for a drive. We stopped in the country and had a picnic in the field and then drove to some woods and went for a walk. On the way home we stopped near a river and had a swim, then played soccer. When we got home in the evening we were all very tired but healthy and happy as well. ';
 sentences = sentenceToArray(sentence);
@@ -9,7 +11,7 @@ function sentenceToArray(sentence) {
 }
 
 const manySpans = document.querySelector('.manySpans');
-
+let itemsArray = [];
 sentences.forEach(function (element) {
     if (
         element != ' ' &&
@@ -32,9 +34,13 @@ sentences.forEach(function (element) {
     ) {
         let mySpan = document.createElement('span');
         mySpan.classList.add(element);
+
         let asterisks = element.replace(/[^,;.]/g, '_');
         mySpan.innerHTML = asterisks;
         manySpans.appendChild(mySpan);
+        if (localStorage.getItem(element)) {
+            mySpan.textContent = localStorage.getItem(element);
+        }
     } else {
         let punctuationSpan = document.createElement('span');
 
@@ -59,6 +65,7 @@ const mySubmitFunction = () => {
     let guess = inputElement.value.trim();
 
     if (sentences.includes(guess)) {
+        localStorage.setItem(guess, guess);
         const removeItList = document.querySelectorAll(`.${guess}`);
         removeItList.forEach(element => (element.textContent = `${guess} `));
     } else {
@@ -71,6 +78,7 @@ const mySubmitFunctionUpper = () => {
     let upperGuess = guess.charAt(0).toUpperCase() + guess.slice(1);
 
     if (sentences.includes(upperGuess)) {
+        localStorage.setItem(upperGuess, upperGuess);
         const removeItUpperList = document.querySelectorAll(`.${upperGuess}`);
         removeItUpperList.forEach(
             element => (element.textContent = `${upperGuess} `)
@@ -96,3 +104,10 @@ function checkWin() {
         inputButton.classList.add('wellDone');
     }
 }
+
+button.addEventListener('click', function () {
+    localStorage.clear();
+    while (ul.firstChild) {
+        ul.removeChild(ul.firstChild);
+    }
+});
