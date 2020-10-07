@@ -1,5 +1,5 @@
 sentence =
-    'An old woman lives next door. Every morning she gets up at six and goes out for a long walk. In the afternoon she works in her garden, and in the evening she often goes to the movies. One day I asked her about her life. “I am a very happy person,” she told me “and do you know my secret? I have never been married!“';
+    'Last Sunday some friends and I went out for a drive. We stopped in the country and had a picnic in the field and then drove to some woods and went for a walk. On the way home we stopped near a river and had a swim, then played soccer. When we got home in the evening we were all very tired but healthy and happy as well. ';
 sentences = sentenceToArray(sentence);
 function sentenceToArray(sentence) {
     const re = /\w+|./g;

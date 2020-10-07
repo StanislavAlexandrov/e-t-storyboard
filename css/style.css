@@ -30,16 +30,6 @@ body {
     flex-wrap: wrap;
 }
 
-.toBeReplaced {
-    color: black;
-    font-family: 'Lucida Console', Monaco, monospace;
-}
-
-.toBeRevealed {
-    visibility: visible;
-    margin: auto 0;
-}
-
 .inputClass,
 .inputButton {
     display: flex;
