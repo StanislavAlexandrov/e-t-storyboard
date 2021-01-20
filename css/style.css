@@ -16,6 +16,12 @@ body {
     white-space: pre;
 }
 
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
 .wellDone {
     display: flex;
     justify-content: center;
