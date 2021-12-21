@@ -67,7 +67,7 @@ const mySubmitFunction = () => {
     if (sentences.includes(guess)) {
         localStorage.setItem(guess, guess);
         const removeItList = document.querySelectorAll(`.${guess}`);
-        removeItList.forEach(element => (element.textContent = `${guess} `));
+        removeItList.forEach((element) => (element.textContent = `${guess} `));
     } else {
         errorShow();
     }
@@ -81,7 +81,7 @@ const mySubmitFunctionUpper = () => {
         localStorage.setItem(upperGuess, upperGuess);
         const removeItUpperList = document.querySelectorAll(`.${upperGuess}`);
         removeItUpperList.forEach(
-            element => (element.textContent = `${upperGuess} `)
+            (element) => (element.textContent = `${upperGuess} `)
         );
     }
 };
